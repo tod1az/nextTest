@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Button from "../Button/Button";
 import Link from "next/link";
 
 const PostList = ({ show }) => {
@@ -22,23 +23,12 @@ const PostList = ({ show }) => {
       ? setPosts(auxPosts)
       : setPosts(posts.filter((post) => post.title.includes(e.target.value)));
   };
+  const content = "Boton componentizado";
   return (
     <div>
-      <input className=" bg-black" onChange={StartWith} />
-      <button
-        onClick={AZ}
-        className="bg-black text-blue-200 rounded-2xl p-1 border-2 border-white
-             hover:bg-gray-400 hover:text-red-200 hover:scale-110"
-      >
-        A-Z
-      </button>
-      <button
-        onClick={ZA}
-        className="bg-black text-blue-200 rounded-2xl p-1  border-2 border-white
-             hover:bg-gray-400 hover:text-red-200 hover:scale-110"
-      >
-        Z-A
-      </button>
+      <Button content={"A-Z"} cb={AZ} />
+      <Button content={"Z-A"} cb={ZA} />
+      <input className=" bg-black border-2 rounded-3xl p-1" onChange={StartWith} />
       <ul className="px-80">
         {posts.map(({ id, title }) => (
           <Link key={title} href={`/posts/${id}`}>

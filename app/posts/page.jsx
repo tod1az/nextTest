@@ -1,14 +1,11 @@
-"use client";
 import Link from "next/link";
-import { useState } from "react";
 import PostList from "../components/PostList/PostList";
+import { GET as getPosts } from "../api/posts/route";
+import { GET as getTodos } from "../api/todos/route";
 
-const fetchTodos = async (setPosts) => {
-  let posts = await fetch("http://localhost:3000/api/posts", {
-    cache: "no-store",
-  }).then((res) => res.json());
-  if (!posts.length) throw new Error("No posts been created");
-
+const fetchTodos = async () => {
+  let posts = await getPosts().then((posts) => posts.json());
+  let todos = await getTodos().then((todos) => todos.json());
   return posts;
 };
 
