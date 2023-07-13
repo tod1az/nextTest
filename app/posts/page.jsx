@@ -1,17 +1,10 @@
+"use client";
 import Link from "next/link";
 import PostList from "../components/PostList/PostList";
-import { GET as getPosts } from "../api/posts/route";
-import { GET as getTodos } from "../api/todos/route";
-
-const fetchTodos = async () => {
-  let posts = await getPosts().then((posts) => posts.json());
-  let todos = await getTodos().then((todos) => todos.json());
-  return posts;
-};
 
 export default async function Posts() {
-  let posts = await fetchTodos();
-
+  let data = await fetch("/api/posts");
+  let posts = await data.json();
   return (
     <div>
       <PostList show={posts} />
